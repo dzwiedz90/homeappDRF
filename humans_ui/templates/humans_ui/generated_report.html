@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "./head.html" %}
+</head>
+
+<body>
+    {% load static %}
+    <div id="logo"><img src="{% static 'humans_ui/logo.png' %}" style="with: 35px; height: 35px;"> HumanApp</div>
+
+    <div class="button"><a href="javascript:window.print()">Drukuj</a></div>
+    <div>
+        <h1>{{human.name}}</h1>
+        <img src="http://localhost:8000/media{{human.photo}}" style="max-width: 100px; max-height: 100px;"></br>
+        Płeć: {% if human.gender == "ML" %}
+            mężczyzna</br>
+        {% else %}
+            kobieta</br>
+        {% endif %}
+        Data urodzenia: {{human.date_born|date:'Y-m-d'}}</br>
+        Wzrost: {{human.height}}</br>
+        Waga: {{human.current_weight}}</br></br>
+
+        <div id="title" style="text-align: justify;">Zabiegi</div>
+        <ul>
+        {% for item in data %}
+            {% if item.get_class == 'HumanTreatment' %}
+                <li>
+                    Zabieg: {{item.treatment.treatment_name}}</br>
+                    Klinika: {{item.clinic.clinic_name}}</br>
+                    Data wystąpienia: {{item.date_occurred|date:'Y-m-d'}}</br>
+                    Data wyleczenia: {{item.date_treated|date:'Y-m-d'}}</br>
+                    Opis: {{item.description}}</br>
+                    Satysfakcja: {{item.satisfaction}}</br>
+                    Lekarz prowadzący: {{item.doctor}}</br>
+
+                    {% if treatment_updates_list %}
+                        <h4>Wpisy</h4>
+                        <div>
+                        {% for tr_update in treatment_updates_list %}
+                            {% for update in tr_update %}
+                                <ul>
+                                {% if update.treatment_update_treatment_id == item.id %}
+                                    <li>Wpis: {{update.treatment_update}}</br></li>
+                                {% endif %}
+                                </ul>
+                            {% endfor %}
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+                </li></br></br>
+            {% endif %}
+        {% endfor %}</br>
+        </ul>
+        <div id="title" style="text-align: justify;">Choroby</div>
+        <ul>
+        {% for item in data %}
+            {% if item.get_class == 'HumanDisease' %}
+                <li>
+                    Zabieg: {{item.disease.disease_name}}</br>
+                    Klinika: {{item.clinic.clinic_name}}</br>
+                    Data wystąpienia: {{item.date_occurred|date:'Y-m-d'}}</br>
+                    Data wyleczenia: {{item.date_treated|date:'Y-m-d'}}</br>
+                    Opis: {{item.description}}</br>
+                    Satysfakcja: {{item.satisfaction}}</br>
+                    Lekarz prowadzący: {{item.doctor}}</br>
+
+                    {% if disease_updates_list %}
+                        <h4>Wpisy</h4>
+                        <div>
+                        {% for d_update in disease_updates_list %}
+                            {% for update in d_update %}
+                                <ul>
+                                {% if update.disease_update_disease_id == item.id %}
+                                    <li>Wpis: {{update.disease_update}}</br></li>
+                                {% endif %}
+                                </ul>
+                            {% endfor %}
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+                </li></br></br>
+            {% endif %}
+        {% endfor %}</br>
+        </ul>
+        <div id="title" style="text-align: justify;">Informacje ogólne</div>
+        <ul>
+        {% for item in data %}
+            {% if item.get_class == 'HumanGeneralInformation' %}
+            <li>Informacja: {{item.content}}</br></br></li>
+            {% endif %}
+        {% endfor %}</br>
+        </ul>
+    </div>
+</body>
+</html>

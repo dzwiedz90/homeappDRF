@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="pl">
+    <head>
+        {% include "../head.html" %}
+    </head>
+
+    <body>
+        <div id="logo">HumanApp Człeki</div>
+</br></br>
+        <h3>Daty podawać w formacie:<p style="color: red;">RRRR-MM-DD</p></h3>
+
+        <div id="content" style="clear:both;">
+            <form action="/ui/humans/{{pk}}/human/tests/modify/{{id}}/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <label for="id_human">Człek:</label>
+                <select name="human" required id="id_human">
+                    {% for human in form.human %}
+                        {{human}}
+                    {% endfor %}
+                </select></br></br>
+
+                <label for="id_medical_test">Badanie:</label>
+                <select name="medical_test" required id="id_medical_test">
+                    {% for medical_test in form.medical_test %}
+                        {{medical_test}}
+                    {% endfor %}
+                </select></br></br>
+
+                <label for="id_date_taken">Data badania:</label>
+                <input type="text" name="date_taken" value={{test.date_taken|date:'Y-m-d'}} required id="id_date_taken"></br></br>
+
+                <label for="id_clinic">Klinika:</label>
+                <select name="clinic" required id="id_clinic">
+                    {% for clinic in form.clinic %}
+                    {{clinic}}
+                    {% endfor %}
+                </select></br></br>
+
+                <label for="id_ordering_unit">Jednostka zlecająca:</label>
+                <select name="ordering_unit" required id="id_ordering_unit">
+                    {% for ordering_unit in form.ordering_unit %}
+                    {{ordering_unit}}
+                    {% endfor %}
+                </select></br></br>
+
+                <label for="id_satisfaction">Satysfakcja z badania:</label>
+                <select name="satisfaction" id="id_satisfaction">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5" selected>5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select></br></br>
+
+                <label for="id_description">Opis badania:</label>
+                <input type="text" name="description" value="{{test.description}}" required id="id_description"></br></br>
+
+                <label for="file">Plik:</label>
+                <input type="file" id="file" name="file" accept="image/png, image/jpeg, .pdf"></br></br>
+
+                <label for="id_results">Wyniki (opcjonalne):</label>
+                <input type="text" name="results" value="{{test.results}}"  maxlength="4096" id="id_results"></br></br></br>
+
+                <input type="submit" value="Wyślij">
+            </form>
+        </div>
+    </body>
+</html>

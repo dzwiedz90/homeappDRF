@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="pl" xmlns="http://www.w3.org/1999/html">
+    <head>
+        {% include "../../head.html" %}
+    </head>
+
+    <body>
+        <h3>Daty podawać w formacie:<p style="color: red;">RRRR-MM-DD GG:MM:SS</p></h3>
+
+        <div id="content" style="clear:both;">
+            <form action="/ui/humans/resources/tests/modify/{{id}}/" method="post">
+                {% csrf_token %}
+
+                <label for="id_medical_test_name">Nazwa zabiegu:</label>
+                <input type="text" name="medical_test_name" maxlength="128" value="{{test.medical_test_name}}" required id="id_medical_test_name"></br></br>
+
+                <label for="id_description">Opis:</label>
+                <input type="text" name="description" maxlength="256" value="{{test.description}}" required id="id_description"></br></br>
+
+                <input type="submit" value="Dodaj">
+            </form>
+        </div>
+    </body>
+</html>

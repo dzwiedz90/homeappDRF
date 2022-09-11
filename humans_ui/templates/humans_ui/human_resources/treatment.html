@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="pl">
+    <head>
+        {% include "../head.html" %}
+    </head>
+
+    <body>
+        {% include "./resources_menus.html" %}
+
+        <div class="button" style="clear:both;"><a href="/ui/humans/resources/treatments/add/">Dodaj</a></div>
+        <div id="title" style="text-align: justify;">Zabiegi</div>
+
+        <div id="content" style="clear:both;">
+            <fieldset>
+                {% if treatments_list %}
+                <ul>
+                    {% for treatment in treatments_list %}
+                    <li>
+                        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+                        id: {{treatment.id}}</br>
+                        Nazwa zabiegu: {{treatment.treatment_name}}</br>
+                        Opis: {{treatment.description}}</br>
+                        <div class="button"><a href="/ui/humans/resources/treatments/modify/{{treatment.id}}/">Edytuj</a></div>
+                    </li></br>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>No treatments are available.</p>
+                {% endif %}
+            </fieldset>
+        </div>
+    </body>
+</html>

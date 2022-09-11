@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="pl">
+    <head>
+        {% include "./head.html" %}
+    </head>
+
+    <body>
+        {% include "./menus_2.html" %}
+
+        <div class="button" style="clear:both;"><a href="/ui/humans/{{pk}}/human/treatments/add/">Dodaj</a></div>
+        <div id="title" style="text-align: justify;">Zabiegi człeka</div>
+
+        <div id="content" style="clear:both;">
+            <fieldset>
+                {% if human_treatment_list %}
+                <legend><h1>{{human_treatment_list.0.human.name}}</h1></legend>
+                <ul>
+                    {% for human_treatment in human_treatment_list %}
+                    <li>id: {{human_treatment.id}}</br>
+                        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+                        Zabieg: {{human_treatment.treatment.treatment_name}}</br>
+                        Klinika: {{human_treatment.clinic.clinic_name}}</br>
+                        Data wystąpienia: {{human_treatment.date_occurred|date:'Y-m-d'}}</br>
+                        Data wyleczenia: {{human_treatment.date_treated|date:'Y-m-d'}}</br>
+                        Opis: {{human_treatment.description}}</br>
+                        Satysfakcja: {{human_treatment.satisfaction}}</br>
+                        Lekarz prowadzący: {{human_treatment.doctor}}</br>
+                        <div class="button"><a href="/ui/humans/{{human_treatment.human.id}}/human/treatments/modify/{{human_treatment.id}}/">Edytuj</a></div>
+                        <div class="button"><a href="/ui/humans/{{human_treatment.human.id}}/human/treatments/add/update/{{human_treatment.id}}/">Dodaj wpis</a></div>
+
+                        {% if treatment_updates_list %}
+                        <button type="button" class="collapsible">Wpisy</button>
+                        <div class="content">
+                        {% for item in treatment_updates_list %}
+                            {% for update in item %}
+                                <ul>
+                                {% if update.treatment_update_treatment_id == human_treatment.id %}
+                                    <li>Wpis: {{update.treatment_update}}</br></li>
+                                    <div class="button"><a href="/ui/humans/{{human_treatment.human.id}}/human/treatments/modify/update/{{human_treatment.id}}/{{update.id}}/">Edytuj wpis</a></div>
+                                {% endif %}
+                                </ul>
+                            {% endfor %}
+                        {% endfor %}
+                        </div>
+                        {% endif %}
+                    </li></br>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>No treatments are available.</p>
+                {% endif %}
+            </fieldset>
+        </div>
+
+        <script>
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+
+            for (i = 0; i < coll.length; i++) {
+              coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight){
+                  content.style.maxHeight = null;
+                } else {
+                  content.style.maxHeight = content.scrollHeight + "px";
+                }
+              });
+            }
+        </script>
+    </body>
+</html>

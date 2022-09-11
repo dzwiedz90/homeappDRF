@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="pl">
+    <head>
+        {% include "../head.html" %}
+    </head>
+
+    <body>
+        {% include "./resources_menus.html" %}
+
+        <div class="button" style="clear:both;"><a href="/ui/humans/resources/tests/add/">Dodaj</a></div>
+        <div id="title" style="text-align: justify;">Badania</div>
+
+        <div id="content" style="clear:both;">
+            <fieldset>
+                {% if tests_list %}
+                <ul>
+                    {% for test in tests_list %}
+                    <li>
+                        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+                        id: {{test.id}}</br>
+                        Nazwa badania: {{test.medical_test_name}}</br>
+                        Opis: {{test.description}}</br>
+                        <div class="button"><a href="/ui/humans/resources/tests/modify/{{test.id}}/">Edytuj</a></div>
+                    </li></br>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>No treatments are available.</p>
+                {% endif %}
+            </fieldset>
+        </div>
+    </body>
+</html>

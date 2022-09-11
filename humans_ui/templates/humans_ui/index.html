@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="pl">
+    <head>
+        {% include "./head.html" %}
+    </head>
+
+    <body>
+        <div id="dupa">
+                <div id="logo"><img src="{% static 'humans_ui/logo.png' %}" style="with: 35px; height: 35px;"> HumanApp Człeki</div></div>
+        <div class="button"><a href="/ui/humans/human/add">Dodaj człeka</a></div>
+
+        {% if humans_list %}
+            <ul>
+                {% for human in humans_list %}
+                    <li><a href="/ui/humans/{{human.id}}/human">{{human.name}}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No humans are available.</p>
+        {% endif %}
+
+        <div class="button"><a href="/ui/humans/resources/treatments/">Zasoby</a></div>
+    </body>
+</html>

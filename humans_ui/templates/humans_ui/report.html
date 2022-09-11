@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "./head.html" %}
+</head>
+
+<body>
+    {% include "./menus_2.html" %}
+
+    <h1>Wybierz sekcje do wygenerowania w raporcie:</h1></br></br>
+
+    <form action="/ui/humans/report/" style="font-size: 20px;" method="post">
+        {% csrf_token %}
+
+        <input type="hidden" name="pk" required value={{pk}}>
+
+        <button type="button" class="collapsible">Zabiegi</button>
+        <div class="content">
+        {% for treatment in treatments %}
+            <input style="margin-left: 25px;" type="checkbox" id="treatment{{treatment.id}}" name="treatment{{treatment.id}}"  value="{{treatment.id}}">
+            <label for="treatment{{treatment.id}}">{{treatment.treatment_name}}, {{treatment.date_occurred|date:'Y-m-d'}}, {{treatment.clinic}}</label></br>
+        {% endfor %}
+        </div></br>
+
+        <button type="button" class="collapsible">Choroby</button>
+        <div class="content">
+        {% for disease in diseases %}
+            <input style="margin-left: 25px;" type="checkbox" id="disease{{disease.id}}" name="disease{{disease.id}}"  value="{{disease.id}}">
+            <label for="disease{{disease.id}}">{{disease.disease_name}}, {{disease.date_occurred|date:'Y-m-d'}}, {{disease.clinic}}</label></br>
+        {% endfor %}
+        </div></br>
+
+        <button type="button" class="collapsible">Informacje ogólne</button>
+        <div class="content">
+        {% for information in informations %}
+            <input style="margin-left: 25px;" type="checkbox" id="information{{information.id}}" name="information{{information.id}}"  value="{{information.id}}">
+            <label for="information{{information.id}}">{{information.content}}</label></br>
+        {% endfor %}
+        </div></br>
+
+        <input type="submit" value="Generuj raport">
+    </form>
+
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight){
+              content.style.maxHeight = null;
+            } else {
+              content.style.maxHeight = content.scrollHeight + "px";
+            }
+          });
+        }
+    </script>
+</body>
+</html>

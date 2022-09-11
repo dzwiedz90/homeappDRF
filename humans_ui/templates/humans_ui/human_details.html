@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="pl">
+    <head>
+        {% include "./head.html" %}
+    </head>
+
+    <body>
+        {% include "./menus.html" %}
+
+        <div id="title" style="text-align: justify;">Profil człeka</div>
+
+        <div id="content" style="clear:both;">
+            <fieldset>
+                <legend><h1>{{human.0.name}}</h1></legend>
+                {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+                <img src="http://localhost:8000/media{{human.0.photo}}" style="max-width: 250px; max-height: 250px;"></br>
+                Płeć: {% if human.0.gender == "ML" %}
+                mężczyzna</br>
+                {% else %}
+                kobieta</br>
+                {% endif %}
+                Data urodzenia: {{human.0.date_born|date:'Y-m-d'}}</br>
+                Wzrost: {{human.0.height}}</br>
+                Waga: {{human.0.current_weight}}</br>
+                Czy zarchiwizowany: {{human.0.is_archived}}</br>
+            </fieldset>
+        </div>
+    </body>
+</html>

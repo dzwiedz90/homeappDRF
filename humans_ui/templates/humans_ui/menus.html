@@ -1,0 +1,18 @@
+{% load static %}
+<div id="logo"><img src="{% static 'humans_ui/logo.png' %}" style="with: 35px; height: 35px;"> HumanApp Człeki</div>
+<div style="float: left;">
+    <div class="button" style="float: left;"><a href="/ui/humans/">Główna</a></div>
+    <div class="button" style="clear:both;"><a href="/ui/humans/{{pk}}/human/modify/">Modyfikuj</a></div>
+</div>
+<div id="menu">
+    <div class="menu_tile"><a href="/ui/humans/{{pk}}/human/">Człek</a></div>
+    <div class="menu_tile"><a href="/ui/humans/{{pk}}/human/treatments/">Zabiegi</a></div>
+    <div class="menu_tile"><a href="/ui/humans/{{pk}}/human/diseases/">Choroby</a></div>
+    <div class="menu_tile"><a href="/ui/humans/{{pk}}/human/tests/">Wyniki badań</a></div>
+    <div class="menu_tile"><a href="/ui/humans/{{pk}}/human/weight/">Waga</a></div>
+    <div class="menu_tile"><a href="/ui/humans/{{pk}}/human/information/">Informacje ogólne</a></div>
+    <form action="/ui/humans/report/" method="get">
+        <input type="hidden" name="pk" required value={{pk}}>
+        <input class="button" type="submit" style="float: right;" value="Raport">
+    </form>
+</div>

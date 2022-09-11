@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="pl">
+    <head>
+        {% include "../head.html" %}
+    </head>
+
+    <body>
+        <div id="logo">HumanApp Człeki</div>
+</br></br>
+        <h3>Daty podawać w formacie:<p style="color: red;">RRRR-MM-DD</p></h3>
+
+        <div id="content" style="clear:both;">
+            <form action="/ui/humans/{{pk}}/human/diseases/modify/update/{{id}}/{{upid}}/" method="post">
+                {% csrf_token %}
+
+                <label for="id_disease_update">Wpis:</label>
+                <input type="text" name="disease_update" required id="id_disease_update" value="{{disease_update.disease_update}}"></br></br>
+
+                <input type="submit" value="Zapisz">
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="pl" xmlns="http://www.w3.org/1999/html">
+    <head>
+        {% include "../head.html" %}
+    </head>
+
+    <body>
+        <h3>Daty podawać w formacie:<p style="color: red;">RRRR-MM-DD</p></h3>
+
+        <div id="content" style="clear:both;">
+            <form action="/ui/humans/{{pk}}/human/modify/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <label for="id_human_name">Imię:</label>
+                <input type="text" name="human_name" value={{human.name}} maxlength="64" required id="id_human_name"></br></br>
+
+                <label for="id_gender">Płeć:</label>
+                <select name="gender" id="id_gender">
+                    {% for g in form.gender %}
+                        {{g}}
+                    {% endfor %}
+                </select></br></br>
+
+                <label for="id_date_born">Data urodzenia:</label>
+                <input type="text" name="date_born" value={{human.date_born|date:'Y-m-d'}} required id="id_date_born"></br></br>
+
+                <label for="id_height">Wzrost:</label>
+                <input type="number" name="height" value="{{human.height}}" step="any" required id="id_height"></br></br>
+
+                <label for="id_current_weight">Waga:</label>
+                <input type="number" name="current_weight" value={{human.current_weight}} step="any" required id="id_current_weight"></br></br>
+
+                <label for="id_is_archived">Zarchiwizowany?</label>
+                <input type="checkbox" name="is_archived" id="id_is_archived"></br></br>
+
+                <label for="file">Plik:</label>
+                <input type="file" id="file" name="file" accept="image/png, image/jpeg"></br></br>
+
+                <input type="submit" value="Zapisz">
+            </form>
+        </div>
+    </body>
+</html>

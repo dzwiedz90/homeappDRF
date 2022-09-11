@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="pl">
+    <head>
+        {% include "../head.html" %}
+    </head>
+
+    <body>
+        <div id="logo">HumanApp Człeki</div>
+</br></br>
+        <h3>Daty podawać w formacie:<p style="color: red;">RRRR-MM-DD</p></h3>
+
+        <div id="content" style="clear:both;">
+            <form action="/ui/humans/{{pk}}/human/information/add/" method="post">
+                {% csrf_token %}
+
+                <label for="id_human">Człek:</label>
+                <select name="human" required id="id_human">
+                    {% for human in form.human %}
+                        {{human}}
+                    {% endfor %}
+                </select></br></br>
+
+                <label for="id_content">Informacja:</label>
+                <input type="text" name="content" required id="id_content"></br></br>
+
+                <input type="submit" value="Dodaj">
+            </form>
+        </div>
+    </body>
+</html>

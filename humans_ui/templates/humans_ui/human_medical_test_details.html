@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="pl">
+    <head>
+        {% include "./head.html" %}
+    </head>
+
+    <body>
+        {% include "./menus_2.html" %}
+
+        <div class="button" style="clear:both;"><a href="/ui/humans/{{pk}}/human/tests/add/">Dodaj</a></div>
+        <div id="title" style="text-align: justify;">Badania człeka</div>
+
+        <div id="content" style="clear:both;">
+            <fieldset>
+                {% if human_medical_test_list %}
+                <legend><h1>{{human_medical_test_list.0.human.name}}</h1></legend>
+                <ul>
+                    {% for human_medical_test in human_medical_test_list %}
+                    <li>id: {{human_medical_test.id}}</br>
+                        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+                        Badanie: {{human_medical_test.medical_test.medical_test_name}}</br>
+                        Data badania: {{human_medical_test.date_taken|date:'Y-m-d'}}</br>
+                        Klinika: {{human_medical_test.clinic.clinic_name}}</br>
+                        Jednostka zlecająca: {{human_medical_test.ordering_unit.clinic_name}}</br>
+                        Satysfakcja: {{human_medical_test.satisfaction}}</br>
+                        Opis: {{human_medical_test.description}}</br>
+                        {% if human_medical_test.file %}
+                        <form action="/ui/humans/{{pk}}/human/tests/file/" method="POST">
+                            <input type="checkbox" id="path" name="path" value="{{human_medical_test.file}}" checked="checked" style="opacity:0; position:absolute; left:9999px;">
+                            Plik: {{human_medical_test.file}}</br>
+                            {% csrf_token %}
+                            <button type="submit">Otwórz</button>
+                        </form>
+                        {% endif %}
+                        Wyniki: {{human_medical_test.results}}</br>
+                        <div class="button"><a href="/ui/humans/{{human_medical_test.human.id}}/human/tests/modify/{{human_medical_test.id}}/">Edytuj</a></div>
+                    </li></br>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>No medical tests are available.</p>
+                {% endif %}
+            </fieldset>
+        </div>
+    </body>
+</html>

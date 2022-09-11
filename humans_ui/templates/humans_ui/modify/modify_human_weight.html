@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="pl" xmlns="http://www.w3.org/1999/html">
+    <head>
+        {% include "../head.html" %}
+    </head>
+
+    <body>
+        <h3>Daty podawać w formacie:<p style="color: red;">RRRR-MM-DD</p></h3>
+
+       <div id="content">
+            <form action="/ui/humans/{{pk}}/human/weight/modify/{{id}}/" method="post">
+                {% csrf_token %}
+
+                <label for="id_human">Człek:</label>
+                <select name="human" required id="id_human">
+                    {% for human in form.human %}
+                        {{human}}
+                    {% endfor %}
+                </select></br></br>
+
+                <label for="id_date_of_measurement">Data pomiaru:</label>
+                <input type="text" name="date_of_measurement" value="{{weight.date_of_measurement|date:'Y-m-d'}}" required id="id_date_of_measurement"></br></br>
+
+                <label for="id_weight">Waga:</label>
+                <input type="text" name="weight" value="{{weight.weight}}" required id="id_weight"></br></br>
+
+                <input type="submit" value="Zapisz">
+            </form>
+        </div>
+    </body>
+</html>

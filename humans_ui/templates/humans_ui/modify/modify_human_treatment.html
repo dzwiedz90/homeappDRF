@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="pl" xmlns="http://www.w3.org/1999/html">
+    <head>
+        {% include "../head.html" %}
+    </head>
+
+    <body>
+        <h3>Daty podawać w formacie:<p style="color: red;">RRRR-MM-DD</p></h3>
+
+       <div id="content">
+            <form action="/ui/humans/{{pk}}/human/treatments/modify/{{id}}/" method="post">
+                {% csrf_token %}
+
+                <label for="id_human">Człek:</label>
+                <select name="human" required id="id_human">
+                    {% for human in form.human %}
+                        {{human}}
+                    {% endfor %}
+                </select></br></br>
+
+                <label for="id_treatment">Zabieg:</label>
+                <select name="treatment" required id="id_treatment">
+                    {% for t in form.treatment %}
+                        {{t}}
+                    {% endfor %}
+                </select></br></br>
+
+                <label for="id_clinic">Klinika:</label>
+                <select name="clinic" required id="id_clinic">
+                    {% for clinic in form.clinic %}
+                        {{clinic}}
+                    {% endfor %}
+                </select></br></br>
+
+                <label for="id_date_occurred">Data zabiegu:</label>
+                <input type="text" name="date_occurred" value={{treatment.date_occurred|date:'Y-m-d'}} required id="id_date_occurred"></br></br>
+
+                <label for="id_date_treated">Data wyleczenia:</label>
+                {% if treatment.date_treated %}
+                    <input type="text" name="date_treated" value={{treatment.date_treated|date:'Y-m-d'}} id="id_date_treated"></br></br>
+                {% else %}
+                    <input type="text" name="date_treated" required id="id_date_treated"></br></br>
+                {% endif %}
+
+                <label for="id_description">Opis zabiegu:</label>
+                <input type="text" name="description" value="{{treatment.description}}" required id="id_description"></br></br>
+
+                <label for="id_satisfaction">Satysfakcja z leczenia:</label>
+
+                <select name="satisfaction" id="id_satisfaction">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5" selected>5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select></br></br>
+
+                <label for="id_doctor">Lekarz prowadzący (opcjonalne):</label>
+                <input type="text" name="doctor" value="{{treatment.doctor}}" maxlength="32" id="id_doctor"></br></br></br>
+
+                <input type="submit" value="Zapisz">
+            </form>
+        </div>
+    </body>
+</html>

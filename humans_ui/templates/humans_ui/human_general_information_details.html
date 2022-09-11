@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="pl">
+    <head>
+        {% include "./head.html" %}
+    </head>
+
+    <body>
+        {% include "./menus_2.html" %}
+
+        <div class="button" style="clear:both;"><a href="/ui/humans/{{pk}}/human/information/add/">Dodaj</a></div>
+        <div id="title" style="text-align: justify;">Ogólne informacje</div>
+
+        <div id="content" style="clear:both;">
+            <fieldset>
+                {% if human_general_information_list %}
+                <legend><h1>{{human_general_information_list.0.human.name}}</h1></legend>
+                <ul>
+                    {% for general_information in human_general_information_list %}
+                    <li>id: {{general_information.id}}</br>
+                        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+                        Informacja: {{general_information.content}}</br>
+                        <div class="button"><a href="/ui/humans/{{general_information.human.id}}/human/information/modify/{{general_information.id}}/">Edytuj</a></div>
+                    </li></br>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>No general information are available.</p>
+                {% endif %}
+            </fieldset>
+        </div>
+    </body>
+</html>

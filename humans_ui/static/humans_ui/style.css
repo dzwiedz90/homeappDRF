@@ -1,0 +1,104 @@
+#dupa
+{
+    background-color: pink;
+}
+
+#logo
+{
+    background-color: pink;
+    font-size: 32px;
+    border-style: solid;
+    border-radius: 25px;
+    text-align: center;
+    padding: 15px;
+}
+
+#menu
+{
+    background-color: orange;
+    border-style: solid;
+    border-radius: 15px;
+    padding: 8px;
+    width = 100%;
+    overflow: hidden;
+    margin-top: 3px;
+    margin-bottom: 15px;
+}
+
+.menu_tile
+{
+    font-size: 16px;
+    with: 14%;
+    height: 30px;
+    background-color: green;
+    float: left;
+    padding: 8px;
+    display: inline-block;
+    margin-left: auto;
+	margin-right: 5px;
+	border-style: solid;
+    border-radius: 15px;
+}
+
+a
+{
+    text-decoration: none;
+    color: blue;
+}
+
+.button
+{
+    border-style: solid;
+    border-radius: 15px;
+    width: 100px;
+    text-align: center;
+    margin: 10px;
+    background-color: yellow;
+    padding: 4px;
+}
+
+#title
+{
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+body
+{
+    background-color: GhostWhite;
+}
+
+ul
+{
+    background-color: ivory;
+}
+
+
+ /* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 20px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}

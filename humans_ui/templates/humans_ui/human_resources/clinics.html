@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="pl">
+    <head>
+        {% include "../head.html" %}
+    </head>
+
+    <body>
+        {% include "./resources_menus.html" %}
+
+        <div class="button" style="clear:both;"><a href="/ui/humans/resources/clinics/add/">Dodaj</a></div>
+        <div id="title" style="text-align: justify;">Kliniki</div>
+
+        <div id="content" style="clear:both;">
+            <fieldset>
+                {% if clinics_list %}
+                <ul>
+                    {% for clinic in clinics_list %}
+                    <li>
+                        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+                        id: {{clinic.id}}</br>
+                        Adres: {{clinic.address}}</br>
+                        Telefon: {{clinic.phone_number}}</br>
+                        Godziny otwarcia: {{clinic.opening_hours}}</br>
+                        <div class="button"><a href="/ui/humans/resources/clinics/modify/{{clinic.id}}/">Edytuj</a></div>
+                    </li></br>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>No treatments are available.</p>
+                {% endif %}
+            </fieldset>
+        </div>
+    </body>
+</html>
